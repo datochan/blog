@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 2015-10-25-在xblock-sdk中使用makotemplates
+title: 在xblock-sdk中使用makotemplates
 category: 技术文章
 tag: [edx,studio,]
 ---
