@@ -49,3 +49,8 @@ frag.add_javascript(mako_template.render_unicode(xblock_id=self.location.block_i
 ~~~
 
 最后不要忘记在你的模板中加入 ```## coding: utf-8``` , 到这里引入mako就完成了。
+
+
+* 目录
+{:toc}
+
