@@ -6,12 +6,13 @@
 <meta name="author" content="陈俊州">
 <meta http-equiv="Content-Language" content="zh-CN" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 
 {% if page.keywords %}
-  <meta name="keywords" content="Jekyll,Github">
+  <meta name="keywords" content="{{ page.keywords }}">
 {% endif %}
 {% if page.description  %}
-  <meta name="description " content="">
+<meta name="description " content="{{page.description}}">
 {% endif %}
 
 <link rel="stylesheet" type="text/css" href="{{site.resource_url}}/public/css/style.css" media="screen"{{site.resource_url}}/>
