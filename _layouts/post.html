@@ -1,0 +1,93 @@
+---
+layout: base
+---
+{% assign post = page %}
+{% assign prev = page.previous %}
+{% assign next = page.next %}
+
+<div class="breadcrumb">	
+	<i class="icon-home"></i> 
+	<a href="{{site.url}}" title="陈大头的博客">首页</a> »
+	<a href="http://datochan.me/category-2.html" title="查看 {{post.categories}} 中的全部文章">{{post.categories}}</a> »
+		
+</div>
+
+<main class="main" role="main">
+	<div class="clear"></div>
+	<article class="post cate2  auth1">
+		<h1>{{post.title}}</h1>
+		<div class="postmeta article-meta">
+			<span><i class="icon-calendar"></i> 日期：{{ post.date | date:"%Y-%m-%d" }} </span>
+			<span><i class="icon-book"></i> 栏目：<a href="http://datochan.me/category-2.html" title="{{post.categories}}" target="_blank">{{post.categories}}</a></span>
+	<!-- 		<span><i class="icon-fire"></i> 浏览：219次 </span>
+			<span><i class="icon-comments"></i> 评论：0条</span> -->
+		</div>
+		<div class="entry">
+			{{content}}
+		</div>
+		<div class="tags">
+			<span><i class="icon-tags"></i> 标签：</span>{% for tag in post.tag %}<a href="http://datochan.me/tags-1.html" title="{{tag}}">{{tag}}</a>{% endfor %}
+		</div>
+		<div class="post-nav">
+			{% if prev %}
+			<div class="nav-left">
+				<span><i class="icon-chevron-left"></i> 上一篇：</span>
+				<a href="{{prev.url}}" target="_blank" title="{{prev.title}}">{{prev.title}}</a>
+			</div>
+			{% endif %}
+
+			{% if next %}
+			<div class="nav-right">
+				<span>下一篇：<i class="icon-chevron-right"></i></span>
+				<a href="{{next.url}}" target="_blank" title="{{next.title}}">{{next.title}}</a>
+			</div>
+			{% endif %}
+		</div>
+		<div class="post-copyright">
+			<p>内容版权声明：除非注明，否则皆为本站原创文章。</p>
+			<p>转载注明出处：<a href="{{site.url}}{{post.url}}" title="{{post.title}}" target="_blank">{{post.title}}({{site.url}}{{post.url}})</a></p>
+		</div>	
+
+	<!-- 多说评论框 start -->
+	<div id="comment" class="ds-thread commentsform" data-thread-key="{{post.id}}" data-title="{{post.title | split:'-' | last}}" data-url="{{post.url}}"></div>
+	<!-- 多说评论框 end -->
+	</article>				
+</main>
+
+<aside class="sidebar">	
+<section class="widget" id="divSearchPanel">
+	<h3><i class="icon-search"></i> 搜索</h3>
+	<div>
+		<form name="search" method="post" action="http://ui66.com/zb_system/cmd.php?act=search">
+			<input type="text" name="q" size="11"> <input type="submit" value="搜索">
+		</form>
+	</div>
+</section>
+<section class="widget" id="divRelated">
+	<h3><i class="icon-bookmark"></i> 相关推荐</h3>
+	<ul class="hot-post">
+	{% for rel_post in site.related_posts limit:5 %}
+		{% capture tagIdx %}{{ rel_post.tag | first }}{% endcapture %}
+		<li>
+			<div class="thumb">
+				<a href="{{site.url}}{{ rel_post.url }}" title="{{ rel_post.title | split:'-' | last }}">
+					<img src="{{site.logo_list[tagIdx]}}" alt="{{ rel_post.title | split:'-' | last }}">
+				</a>
+			</div>
+			<div class="hot-title">
+				<a href="{{site.url}}{{ rel_post.url }}" title="{{ rel_post.title | split:'-' | last }}">{{ rel_post.title | split:'-' | last }}</a>
+			</div>
+			<div class="hot-time"><i class="icon-time"></i> {{ rel_post.date | date:"%Y-%m-%d" }}</div>
+		</li>
+	{% endfor %}
+	</ul>
+</section>
+
+<section class="widget" id="scroll">
+	<h3><i class="icon-th-list"></i>文章目录</h3>
+	<ul class="news-list">
+	
+	</ul>
+</section>
+
+</aside>

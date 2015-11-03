@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>xblock-sdk学习笔记之制作studio界面 | 陈大头的博客</title>
+<meta name="author" content="陈俊州">
+<meta http-equiv="Content-Language" content="zh-CN" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+
+
+<link rel="stylesheet" type="text/css" href="http://7xnsgl.com1.z0.glb.clouddn.com/public/css/style.css" media="screen"http://7xnsgl.com1.z0.glb.clouddn.com/>
+<link rel="stylesheet" type="text/css" href="http://7xnsgl.com1.z0.glb.clouddn.com/public/css/font-awesome.min.css" media="screen"http://7xnsgl.com1.z0.glb.clouddn.com/>
+<link rel="stylesheet" type="text/css" href="http://7xnsgl.com1.z0.glb.clouddn.com/public/css/responsiveslides.css" media="screen"http://7xnsgl.com1.z0.glb.clouddn.com/>
+<link rel="stylesheet" type="text/css" href="http://7xnsgl.com1.z0.glb.clouddn.com/public/css/leonhere.css" media="screen"http://7xnsgl.com1.z0.glb.clouddn.com/>
+<link rel="stylesheet" type="text/css" href="http://7xnsgl.com1.z0.glb.clouddn.com/public/js/prettify/prettify.css" media="screen"http://7xnsgl.com1.z0.glb.clouddn.com/>
+
+<!--[if IE 7]>
+<link rel="stylesheet" type="text/css" href="http://7xnsgl.com1.z0.glb.clouddn.com/public/css/font-awesome-ie7.min.css" media="screen"http://7xnsgl.com1.z0.glb.clouddn.com/>
+<![endif]-->
+
+</head>
+<body>
+<header class="site-header" role="banner">
+	<div class="header fixed">
+		<div class="top-box">
+			<div class="logo">
+				<a href="http://localhost:4000" title="莲花乡-十里屯">
+					<img src="http://7xnsgl.com1.z0.glb.clouddn.com/public/images/logo.png" alt="莲花乡-十里屯">
+				</a>
+			</div>
+			<div class="btn"><i class="icon-th-large"></i></div>		
+			<nav class="nav" role="navigation">
+				<div class="menu">
+					<ul>
+						<li id="nvabar-index"><a href="http://localhost:4000">首页</a></li>
+						<li id="navbar-technology"><a href="http://ui66.com/category-2.html">技术文章</a></li>
+						<li id="navbar-life"><a href="http://ui66.com/category-4.html">生活日记</a></li>
+						<li id="navbar-about"><a href="http://ui66.com/7.html">关于我</a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+<div class="clear"></div>
+</header>
+<div class="container">
+<!-- 文章列表 或者 文章内容 -->
+
+
+
+
+<div class="breadcrumb">	
+	<i class="icon-home"></i> 
+	<a href="http://localhost:4000" title="陈大头的博客">首页</a> »
+	<a href="http://datochan.me/category-2.html" title="查看 技术文章 中的全部文章">技术文章</a> »
+		
+</div>
+
+<main class="main" role="main">
+	<div class="clear"></div>
+	<article class="post cate2  auth1">
+		<h1>xblock-sdk学习笔记之制作studio界面</h1>
+		<div class="postmeta article-meta">
+			<span><i class="icon-calendar"></i> 日期：2015-08-28 </span>
+			<span><i class="icon-book"></i> 栏目：<a href="http://datochan.me/category-2.html" title="技术文章" target="_blank">技术文章</a></span>
+	<!-- 		<span><i class="icon-fire"></i> 浏览：219次 </span>
+			<span><i class="icon-comments"></i> 评论：0条</span> -->
+		</div>
+		<div class="entry">
+			<h3 id="studio">使用studio自带的文本编辑器</h3>
+
+<p>如果我们使用过studio的话不难看出它使用的是tinyMCE。如此问题就好解决了，我们只要定义一个textarea控件，在JS中将其初始化成在线编辑器就可以了，大致代码如下:    <br />
+先给出模板代码:</p>
+
+<pre><code class="language-html">&lt;!-- editor --&gt;
+&lt;div class="wrapper-comp-editor is-active is-set" id="editor-tab" data-editor="visual"&gt;
+    &lt;section class="html-editor editor"&gt;
+        &lt;div&gt;&lt;span&gt;Please input the topic request:&lt;/span&gt;&lt;/div&gt;
+        &lt;div class="row"&gt;
+            &lt;textarea class="tiny-mce" name="editor_question" id="editor_question"&gt;{question}&lt;/textarea&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>相应的JS代码:</p>
+
+<pre><code class="language-javascript">tinymce.init({
+            selector: "#editor-tab .tiny-mce",
+            skin: 'studio-tmce4',
+            height:"300",
+            formats: {code: {inline: 'code'}
+        },
+        codemirror: {path: "/static/js/vendor"},
+        plugins: "image link codemirror media",
+        menubar: false,
+        toolbar_items_size: 'small',
+        extended_valid_elements : "iframe[src|frameborder|style|scrolling|class|width|height|name|align|id]",
+        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | code ",
+        resize: "both"
+    });
+</code></pre>
+
+<h3 id="tab">创建tab选项卡</h3>
+
+<p>这个功能我想了很久，本来以为很简单，直接在templates中编写一个tabs就可以了。后来发现不行，因为写的两个div都是在<code>&lt;div class="modal-content"&gt;&lt;/div&gt;</code>中而正常情况下，标签代码应该在<code>&lt;div class="modal-header"&gt;&lt;/div&gt;</code>中，内容在<code>&lt;div class="modal-content"&gt;&lt;/div&gt;</code>中。如此才能正好利用上studio中原有的css和js代码。<br />
+最初想的解决方法是在js中动态为相应的div填充内容。后来感觉上这样做不够合理，应该有其它的解决方案，最后分析了 html组件中的文本输入组件才发现只要将设置页面的div增加 metadata_edit 这个class即可实现tab选项卡的功能。</p>
+
+<pre><code class="language-html">&lt;!-- settings  --&gt;
+&lt;div class="wrapper-comp-settings metadata_edit" id="settings-tab"&gt;
+  &lt;ul class="list-input settings-list metadata_entry"&gt;
+        &lt;li class="field comp-setting-entry metadata_entry"&gt;
+            &lt;div class="wrapper-comp-setting"&gt;
+                &lt;label class="label setting-label" for="module_title"&gt;display name&lt;/label&gt;
+                &lt;input class="input setting-input" type="text" name="module_title" value="{module_title}"&gt;
+            &lt;/div&gt;
+            &lt;span class="tip setting-help"&gt;tips: ......&lt;/span&gt;
+        &lt;/li&gt;
+ 
+        &lt;li class="field comp-setting-entry metadata_entry"&gt;
+            &lt;div class="wrapper-comp-setting"&gt;
+                &lt;label class="label setting-label" for="editor_type"&gt;Editor&lt;/label&gt;
+                &lt;select class="input setting-input" name="editor_type"&gt;
+                            &lt;option value="visual"&gt;visual&lt;/option&gt;
+                            &lt;option value="org"&gt;org&lt;/option&gt;
+                &lt;/select&gt;
+            &lt;/div&gt;
+            &lt;span class="tip setting-help"&gt;tips: ......&lt;/span&gt;
+        &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>如此，在测试时发现，我们填写的设置选项没有任何效果。在浏览器中调试，js报错为:<code>Failed to load metadata-editor template</code>。再进一步跟踪就会发现是在<code>/cms/templates/widgets/metadata-edit.html</code> 模板中加载:<code>/cms/templates/js/metadata-editor.underscore</code> 文件时加载失败了。其文件代码如下:</p>
+
+<pre><code class="language-html">&lt;!-- js templates --&gt;
+&lt;script id="metadata-editor-tpl" type="text/template"&gt;
+    &lt;%static:include path="js/metadata-editor.underscore" /&gt;
+&lt;/script&gt;  
+...
+
+&lt;div class="wrapper-comp-settings metadata_edit" id="settings-tab" data-metadata='${json.dumps(metadata_field_copy, cls=EdxJSONEncoder) | h}'/&gt;
+</code></pre>
+
+<p>对应的 underscore 文件内容:</p>
+
+<pre><code class="language-html">&lt;ul class="list-input settings-list"&gt;
+    &lt;% _.each(_.range(numEntries), function() { %&gt;
+    &lt;li class="field comp-setting-entry metadata_entry"&gt;
+    &lt;/li&gt;
+    &lt;% }) %&gt;
+&lt;/ul&gt;
+</code></pre>
+
+<p>如此，我们再将我们的template内容改写一下:</p>
+
+<pre><code class="language-html">&lt;!-- element --&gt;
+&lt;script id="metadata-editor-tpl" type="text/template"&gt;
+  &lt;ul class="list-input settings-list metadata_entry"&gt;
+        &lt;li class="field comp-setting-entry metadata_entry"&gt;
+            &lt;div class="wrapper-comp-setting"&gt;
+                &lt;label class="label setting-label" for="module_title"&gt;display name&lt;/label&gt;
+                &lt;input class="input setting-input" type="text" name="module_title" value="{module_title}"&gt;
+            &lt;/div&gt;
+            &lt;span class="tip setting-help"&gt;tips: ......&lt;/span&gt;
+        &lt;/li&gt;
+
+        &lt;li class="field comp-setting-entry metadata_entry"&gt;
+            &lt;div class="wrapper-comp-setting"&gt;
+                &lt;label class="label setting-label" for="editor_type"&gt;Editor&lt;/label&gt;
+                &lt;select class="input setting-input" name="editor_type"&gt;
+                            &lt;option value="visual"&gt;visual&lt;/option&gt;
+                            &lt;option value="org"&gt;org&lt;/option&gt;
+                &lt;/select&gt;
+            &lt;/div&gt;
+            &lt;span class="tip setting-help"&gt;tips: ......&lt;/span&gt;
+        &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/script&gt;
+
+&lt;!-- editor --&gt;
+&lt;div class="wrapper-comp-editor is-active is-set" id="editor-tab" data-editor="visual"&gt;
+    &lt;section class="html-editor editor"&gt;
+        &lt;div&gt;&lt;span&gt;Please input the topic request:&lt;/span&gt;&lt;/div&gt;
+        &lt;div class="row"&gt;&lt;textarea class="tiny-mce" name="editor_question" id="editor_question"&gt;{question}&lt;/textarea&gt;&lt;/div&gt;
+    &lt;/section&gt;
+&lt;/div&gt;
+
+&lt;!-- settings  --&gt;
+&lt;div class="wrapper-comp-settings metadata_edit" id="settings-tab"&gt;&lt;/div&gt;
+</code></pre>
+
+<h3 id="studio-1">使用studio自带的保存和取消按钮</h3>
+
+<p>这个问题在github和googlegroup上有好些人都在问，网上现有的比较通用的处理方法是在<code>&lt;div class="modal-content"&gt;&lt;/div&gt;</code>中自定义一个保存和取消按钮，在JS中处理(可以参考:<code>https://groups.google.com/forum/#!searchin/edx-code/xblock$20save/edx-code/l246xiaiGAc/TYTrQX0MvPUJ</code> 和 本文最后的参考资料中的处理方式)。直到后来制作tab页面时才发现自定义的保存、取消按钮会受到选项卡切换的影响。用firebug查看了整个页面的html才知道，页面中原本是有保存和取消按钮的只是被隐藏，不显示而已。<br />
+我最初的解决方法是在js中强行控制 <code>&lt;div class="modal-actions"&gt;&lt;/div&gt;</code>中的元素，强行令其显示，后来在做选项卡之后发现了新的bug。有js将保存按钮隐藏，将取消按钮的title改成OK了。经过一番折腾调试，发现罪魁祸首是:<code>/static/js/views/modals/edit_xblock.js</code>，相关代码如下:</p>
+
+<pre><code class="language-javascript">onDisplayXBlock: function() {
+    var editorView = this.editorView,
+        title = this.getTitle();
+
+    // Notify the runtime that the modal has been shown
+    editorView.notifyRuntime('modal-shown', this);
+
+    // 是否启用自定义的tab控件
+    if (editorView.hasCustomTabs()) {
+        // Hide the modal's header as the custom editor provides its own
+        this.$('.modal-header').hide();
+
+        // Update the custom editor's title
+        editorView.$('.component-name').text(title);
+    } else {
+        this.$('.modal-window-title').text(title);
+        if (editorView.getDataEditor() &amp;&amp; editorView.getMetadataEditor()) {
+            this.addDefaultModes();
+            this.selectMode(editorView.mode);
+        }
+    }
+
+    // 是否使用自定义的动作按钮
+    if (!editorView.hasCustomButtons()) {
+        // 如果当前的xblock插件不支持保存功能，就禁用保存按钮。
+        if (!editorView.xblock.save) {
+            this.disableSave();
+        }
+        this.getActionBar().show();
+    }
+
+    // Resize the modal to fit the window
+    this.resize();
+},
+
+// 禁用保存按钮
+disableSave: function() {
+    var saveButton = this.getActionButton('save'),
+        cancelButton = this.getActionButton('cancel');
+    saveButton.hide();
+    cancelButton.text(gettext('OK'));
+    cancelButton.addClass('action-primary');
+},
+</code></pre>
+
+<p>这代码的意思很明显是说，该xblock插件不支持save方法。根据栈回朔，定位到相关代码如下:</p>
+
+<pre><code class="language-javascript">    handleXBlockFragment: function(fragment, options) {
+        var self = this,
+            wrapper = this.$el,
+            xblockElement,
+            successCallback = options ? options.success || options.done : null,
+            errorCallback = options ? options.error || options.done : null,
+            xblock,
+            fragmentsRendered;
+        
+        fragmentsRendered = this.renderXBlockFragment(fragment, wrapper);
+        fragmentsRendered.always(function() {
+            // 这里得到我们自定义xblock插件的dom对象
+            xblockElement = self.$('.xblock').first();
+            try {
+                // 初始化操作，其实就是进去调用我们xblock的js方法，我们可以跟进看一下
+                xblock = XBlock.initializeBlock(xblockElement);
+                self.xblock = xblock;
+                self.xblockReady(xblock);
+                if (successCallback) {
+                    successCallback(xblock);
+                }
+            } catch (e) {
+                console.error(e.stack);
+                // Add 'xblock-initialization-failed' class to every xblock
+                self.$('.xblock').addClass('xblock-initialization-failed');
+        
+                // If the xblock was rendered but failed then still call xblockReady to allow
+                // drag-and-drop to be initialized.
+                if (xblockElement) {
+                    self.xblockReady(null);
+                }
+                if (errorCallback) {
+                    errorCallback();
+                }
+            }
+        });
+</code></pre>
+
+<p>查看 XBlock.initializeBlock 的定义:/common/static/coffee/src/xblock/core.coffee:10</p>
+
+<pre><code class="language-coffeescript">initializeBlock: (element, requestToken) -&gt;
+    $element = $(element)
+    requestToken = requestToken or $element.data('request-token')
+    children = @initializeBlocks($element, requestToken)
+    runtime = $element.data("runtime-class")
+    version = $element.data("runtime-version")
+    initFnName = $element.data("init")
+    $element.prop('xblock_children', children)
+    if runtime? and version? and initFnName?
+        # 根据相应版本获取我们方法的名称
+        runtime = new window[runtime]["v#{version}"]
+        initFn = window[initFnName]
+        # 调用我们自定义的方法,例如我指定的方法名是: frag.initialize_js('SubjectiveEditBlock')
+        # 此方法是有返回值的，返回一个 类似capa中名后缀为 Descriptor 的xblock对象, 如果没有返回值就是一个空对象。
+        block = initFn(runtime, element) ? {}
+        block.runtime = runtime
+    else
+        elementTag = $('&lt;div&gt;').append($element.clone()).html();
+        console.log("Block #{elementTag} is missing data-runtime, data-runtime-version or data-init, and can't be initialized")
+        block = {}
+
+    block.element = element
+    block.name = $element.data("name")
+
+    $element.trigger("xblock-initialized")
+    $element.data("initialized", true)
+    $element.addClass("xblock-initialized")
+    block
+</code></pre>
+
+<p>到这里一切就都很明了了，我们只要让我们自定义的xblock方法返回一个对象，该对象中包含save方法即可，代码大致如下:</p>
+
+<pre><code class="language-javascript">    // 返回一个自定义对象，其需要有save方法
+    function SubjectiveEditDescriptor(){
+    }
+    
+    function SubjectiveEditBlock(runtime, element) {
+        // 为返回的对象命名，具体请参考 /common/static/coffee/src/xblock/core.coffee:10
+        $(element).data('name', 'SubjectiveEditDescriptor');
+    
+        var subjectiveEditDescriptor = new SubjectiveEditDescriptor();
+        
+        // 定义save方法
+        subjectiveEditDescriptor.save = function(){
+            var handlerUrl = runtime.handlerUrl(element, 'studio_submit');
+            var data = {
+                module_title: $(element).find('input[name=module_title]').val(),
+                editor_type: $(element).find('input[name=editor_type]').val(),
+                editor_question: tinyMCE.activeEditor.getContent()
+            };
+    
+            $.post(handlerUrl, JSON.stringify(data)).done(function(response) {
+                window.location.reload(false);
+            });
+        };
+    
+        tinymce.init({
+                    selector: "#editor-tab .tiny-mce",
+                    skin: 'studio-tmce4',
+                    height:"300",
+                    formats: {code: {inline: 'code'}
+                },
+                codemirror: {path: "/static/js/vendor"},
+                plugins: "image link codemirror media",
+                menubar: false,
+                toolbar_items_size: 'small',
+                extended_valid_elements : "iframe[src|frameborder|style|scrolling|class|width|height|name|align|id]",
+                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | code ",
+                resize: "both"
+            });
+    
+        //  将对象返回
+        return subjectiveEditDescriptor;
+    };
+</code></pre>
+
+<p>至此，Studio界面相关的分析结束。如果哪里有遗漏还望各位看官批评指正。</p>
+
+<h3 id="section">参考资料</h3>
+
+<blockquote>
+  <ol>
+    <li><a href="https://antoviaque.org/docs/edx/xblock/tutorial.html">XBlock 0.1 documentation - Tutorial</a></li>
+    <li><a href="https://xblock.readthedocs.org/en/latest/">XBlock: Open edX courseware components</a></li>
+    <li><a href="http://idefs.com/development-open-edx-56-xblock-network-video-plug-in-development-infrastructure.html">[开发] Open edX 56 网 XBlock 视频插件开发(基础)</a></li>
+  </ol>
+</blockquote>
+
+<ul id="markdown-toc">
+  <li><a href="#studio" id="markdown-toc-studio">使用studio自带的文本编辑器</a></li>
+  <li><a href="#tab" id="markdown-toc-tab">创建tab选项卡</a></li>
+  <li><a href="#studio-1" id="markdown-toc-studio-1">使用studio自带的保存和取消按钮</a></li>
+  <li><a href="#section" id="markdown-toc-section">参考资料</a></li>
+</ul>
+
+
+		</div>
+		<div class="tags">
+			<span><i class="icon-tags"></i> 标签：</span><a href="http://datochan.me/tags-1.html" title="edx">edx</a><a href="http://datochan.me/tags-1.html" title="mako template">mako template</a><a href="http://datochan.me/tags-1.html" title="xblock">xblock</a>
+		</div>
+		<div class="post-nav">
+			
+			<div class="nav-left">
+				<span><i class="icon-chevron-left"></i> 上一篇：</span>
+				<a href="/2015/08/15/python%E5%92%8Cjavascript%E5%85%B1%E7%94%A8%E7%9A%84base64%E5%8A%A0%E8%A7%A3%E5%AF%86%E4%BB%A3%E7%A0%81.html" target="_blank" title="python和javascript共用的base64加解密代码">python和javascript共用的base64加解密代码</a>
+			</div>
+			
+
+			
+			<div class="nav-right">
+				<span>下一篇：<i class="icon-chevron-right"></i></span>
+				<a href="/2015/10/25/%E5%9C%A8xblock-sdk%E4%B8%AD%E4%BD%BF%E7%94%A8makotemplates.html" target="_blank" title="2015-10-25-在xblock-sdk中使用makotemplates">2015-10-25-在xblock-sdk中使用makotemplates</a>
+			</div>
+			
+		</div>
+		<div class="post-copyright">
+			<p>内容版权声明：除非注明，否则皆为本站原创文章。</p>
+			<p>转载注明出处：<a href="http://localhost:4000/2015/08/28/xblock-sdk%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E5%88%B6%E4%BD%9Cstudio%E7%95%8C%E9%9D%A2.html" title="xblock-sdk学习笔记之制作studio界面" target="_blank">xblock-sdk学习笔记之制作studio界面(http://localhost:4000/2015/08/28/xblock-sdk%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E5%88%B6%E4%BD%9Cstudio%E7%95%8C%E9%9D%A2.html)</a></p>
+		</div>	
+
+	<!-- 多说评论框 start -->
+	<div id="comment" class="ds-thread commentsform" data-thread-key="/2015/08/28/xblock-sdk学习笔记之制作studio界面" data-title="sdk学习笔记之制作studio界面" data-url="/2015/08/28/xblock-sdk%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8B%E5%88%B6%E4%BD%9Cstudio%E7%95%8C%E9%9D%A2.html"></div>
+	<!-- 多说评论框 end -->
+	</article>				
+</main>
+
+<aside class="sidebar">	
+<section class="widget" id="divSearchPanel">
+	<h3><i class="icon-search"></i> 搜索</h3>
+	<div>
+		<form name="search" method="post" action="http://ui66.com/zb_system/cmd.php?act=search">
+			<input type="text" name="q" size="11"> <input type="submit" value="搜索">
+		</form>
+	</div>
+</section>
+<section class="widget" id="divRelated">
+	<h3><i class="icon-bookmark"></i> 相关推荐</h3>
+	<ul class="hot-post">
+	
+		
+		<li>
+			<div class="thumb">
+				<a href="http://localhost:4000/2015/10/25/%E5%9C%A8xblock-sdk%E4%B8%AD%E4%BD%BF%E7%94%A8makotemplates.html" title="sdk中使用makotemplates">
+					<img src="http://7xnsgl.com1.z0.glb.clouddn.com/public/images/category/edx.jpg" alt="sdk中使用makotemplates">
+				</a>
+			</div>
+			<div class="hot-title">
+				<a href="http://localhost:4000/2015/10/25/%E5%9C%A8xblock-sdk%E4%B8%AD%E4%BD%BF%E7%94%A8makotemplates.html" title="sdk中使用makotemplates">sdk中使用makotemplates</a>
+			</div>
+			<div class="hot-time"><i class="icon-time"></i> 2015-10-25</div>
+		</li>
+	
+		
+		<li>
+			<div class="thumb">
+				<a href="http://localhost:4000/2015/08/15/python%E5%92%8Cjavascript%E5%85%B1%E7%94%A8%E7%9A%84base64%E5%8A%A0%E8%A7%A3%E5%AF%86%E4%BB%A3%E7%A0%81.html" title="python和javascript共用的base64加解密代码">
+					<img src="http://7xnsgl.com1.z0.glb.clouddn.com/public/images/category/web.png" alt="python和javascript共用的base64加解密代码">
+				</a>
+			</div>
+			<div class="hot-title">
+				<a href="http://localhost:4000/2015/08/15/python%E5%92%8Cjavascript%E5%85%B1%E7%94%A8%E7%9A%84base64%E5%8A%A0%E8%A7%A3%E5%AF%86%E4%BB%A3%E7%A0%81.html" title="python和javascript共用的base64加解密代码">python和javascript共用的base64加解密代码</a>
+			</div>
+			<div class="hot-time"><i class="icon-time"></i> 2015-08-15</div>
+		</li>
+	
+	</ul>
+</section>
+
+<section class="widget" id="scroll">
+	<h3><i class="icon-th-list"></i>文章目录</h3>
+	<ul class="news-list">
+	
+	</ul>
+</section>
+
+</aside>
+
+</div>
+<footer class="footer">
+	<div class="foot">
+	<p>
+		<i class="fa fa-copyright"></i> 2015 <a href="http://datochan.me/">DatoChan's Blog</a>. Theme designed by <a href="http://www.boke8.net/zblog-php-start.html" target="_blank">boke8.net</a> with <a href="https://github.com/mojombo/jekyll/" target="_blank">Jekyll</a> and <a href="http://fortawesome.github.com/Font-Awesome/" target="_blank">Font Awesome</a>.
+	</p>
+</div>
+</footer>
+<div class="backtop">
+	<a title="反回顶部"><i class="icon-chevron-up"></i></a>
+</div>
+<script type="text/javascript" src="http://7xnsgl.com1.z0.glb.clouddn.com/public/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="http://7xnsgl.com1.z0.glb.clouddn.com/public/js/responsiveslides.min.js"></script>
+<script type="text/javascript" src="http://7xnsgl.com1.z0.glb.clouddn.com/public/js/leonhere.js"></script>
+<script type="text/javascript" src="http://7xnsgl.com1.z0.glb.clouddn.com/public/js/jquery.lazyload.js"></script>
+<script type="text/javascript" src="http://7xnsgl.com1.z0.glb.clouddn.com/public/js/prettify/prettify.js"></script>
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"datochan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+<!-- 多说公共JS代码 end -->
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	$(".post .thumb img,.entry img").lazyload({
+  	  	placeholder : "http://7xnsgl.com1.z0.glb.clouddn.com/public/images/grey.gif", 
+  	 	effect      : "fadeIn"
+	});
+
+	$("#slider").responsiveSlides({
+		auto: true,
+		pager: true,
+		nav: false,
+		speed: 500,
+		timeout: 5000,
+		namespace: "centered-btns"
+	});
+
+	// 点击文章目录时让滚动条缓慢滚动
+	$("#scroll").on("click", "a", function() {
+	    $('html, body').animate({
+	        scrollTop: $( $.attr(this, 'href') ).offset().top - 120
+	    }, 500);
+	    return false;
+	});
+
+	// 将目录移动到目录栏
+	$("#scroll ul").html($("#markdown-toc").html());
+	$("#markdown-toc").remove();
+
+	// 启用代码高亮
+    $("pre").addClass("prettyprint");
+    prettyPrint();
+});
+
+</script>
+
+</body>
+</html>

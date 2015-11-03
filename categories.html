@@ -1,15 +1,52 @@
 ---
 layout: base
-title: 首页
+title: 分类页面
 ---
+
+<script type="text/javascript">
+var urlString = window.location.href;//获取url 
+var splitParam = urlString.split("?")[1].split("=")[1];//拆分url得到”=”后面的参数
+
+var dataStr = '{'+
+'{% for cat in site.categories %}'+
+	'{% if cat[0] != site.categories.first[0] %}'+
+		','+
+	'{% endif %}'+
+	'"{{ cat[0] }}":['+
+		'{% for post in cat[1] %}'+
+			'{% if post != cat[1].first %}'+
+				','+
+			'{% endif %}'+
+			'{"url":"{{post.url}}", '+
+			'"title":"{{post.title}}", '+
+			'"excerpt": '+
+				'{% if post.content contains "<!-- more -->" %}'+
+					'"{{ post.content | split:"<!-- more -->" | first | strip_html | strip_newlines }}"'+
+				'{% else %}'+
+					'"{{ post.excerpt | strip_html | truncatewords:100 | strip_newlines }}"'+
+				'{% endif %}'+
+			','+
+			'"date":"{{post.date | date:"%Y-%m-%d"}}"}'+
+		'{% endfor %}'+
+		']'+
+'{% endfor %}}';
+
+var data = JSON.parse(dataStr),
+    curTag = decodeURI(splitParam),
+    archieves = data[curTag];
+
+alert(archieves);
+</script>
+
+<div class="breadcrumb">	
+	<i class="icon-home"></i> 
+	<a href="{{site.url}}" title="陈大头的博客">首页</a> »
+	<a href="http://datochan.me/categories.html" title="查看 {{post.categories}} 中的全部文章">{{post.categories}}</a> »
+		
+</div>
 
 <!-- 首页或者分类或者标签页面的模板 -->
 <main class="main" role="main">
-	<div class="rslides_container">
-		{% include rslides.html %}
-	</div>
-	<div class="clear"></div>
-	
 	<!-- 文章列表开始 -->
 	{% for post in paginator.posts %}
 	<article class="post">
@@ -82,3 +119,4 @@ title: 首页
 <aside class="sidebar">	
 {% include sidebar.html %}
 </aside>
+

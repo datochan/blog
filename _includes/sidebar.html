@@ -1,0 +1,91 @@
+<section class="widget" id="divSearchPanel">
+	<h3><i class="icon-search"></i> 搜索</h3>
+	<div>
+		<form name="search" method="post" action="http://ui66.com/zb_system/cmd.php?act=search">
+			<input type="text" name="q" size="11"> <input type="submit" value="搜索">
+		</form>
+	</div>
+</section>
+
+<section class="widget" id="divTags">
+	<h3><i class="icon-tags"></i>标签云</h3>
+	<ul class="news-list">
+		{% assign first = site.tags.first %}
+		{% assign max = first[1].size %}
+		{% assign min = max %}
+		{% for tag in site.tags offset:1 %}
+		  {% if tag[1].size > max %}
+		    {% assign max = tag[1].size %}
+		  {% elsif tag[1].size < min %}
+		    {% assign min = tag[1].size %}
+		  {% endif %}
+		{% endfor %}
+		{% assign diff = max | minus: min %}
+		{% if diff == 0 %}
+		{% assign diff = 1 %}
+		{% endif %}
+		{% for tag in site.tags %}
+		  {% assign temp = tag[1].size | minus: min | times: 36 | divided_by: diff %}
+		  {% assign base = temp | divided_by: 4 %}
+		  {% assign remain = temp | modulo: 4 %}
+		  {% if remain == 0 %}
+		    {% assign size = base | plus: 9 %}
+		  {% elsif remain == 1 or remain == 2 %}
+		    {% assign size = base | plus: 9 | append: '.5' %}
+		  {% else %}
+		    {% assign size = base | plus: 10 %}
+		  {% endif %}
+		  {% if remain == 0 or remain == 1 %}
+		    {% assign color = 9 | minus: base %}
+		  {% else %}
+		    {% assign color = 8 | minus: base %}
+		  {% endif %}
+		  <a href="{{ site.JB.tags_path }}#{{ tag[0] }}-ref" style="font-size: {{ size }}pt; color: #{{ color }}{{ color }}{{ color }};">{{ tag[0] }}</a>
+		{% endfor %}
+	</ul>
+
+</section>
+
+<section class="widget" id="divFiled">
+	<h3><i class="icon-th-list"></i>文章存档</h3>
+	{% assign post_month1 = '' %}
+    {% assign article_count = 0 %}
+
+	<ul class="news-list">
+	{% for post in site.posts %}
+		{% capture post_month2 %}{{ post.date | date: '%Y 年 %m 月' }}{% endcapture %}
+		{% if forloop.index == 1 %}
+	        {% assign post_month1 = post_month2 %}
+	    {% endif %}
+
+		{% if post_month1 != post_month2 %}
+			<li>{{post_month1}} ({{article_count}})</li>
+	        {% assign post_month1 = post_month2 %}
+    		{% assign article_count = 0 %}
+	    {% endif %}
+
+	    {% capture article_count %}{{ article_count | plus:1 }}{% endcapture %}
+	{% endfor %}
+	{% if post_month1 != '' %}
+	<li>{{post_month1}} ({{article_count}})</li>
+    {% endif %}
+
+	</ul>
+</section>
+
+<section class="widget" id="divLinkage">
+	<h3><i class="icon-bookmark"></i> 友情链接</h3>
+	<ul class="news-list">
+	{% for item in site.data.linkage %}
+	<li><a href="{{item.linkage.url}}" title="{{item.linkage.title}}">{{item.linkage.title}}</a></li>
+	{% endfor %}
+	</ul>
+</section>
+
+<section class="widget" id="divStatistics">
+	<h3><i class="icon-credit-card"></i> 站点信息</h3>
+	<ul class="news-list">
+		<li><a href="javascript:void(0);">文章总数:{{site.posts|size}}</a></li><li><a href="javascript:void(0);">页面总数:{{site.pages|size}}</a></li>
+		<li><a href="javascript:void(0);">分类总数:{{site.categories|size}}</a></li><li><a href="javascript:void(0);">标签总数:{{site.tags|size}}</a></li>
+	</ul>
+</section>

@@ -1,15 +1,17 @@
 ---
 layout: base
-title: 首页
+title: 搜索页面
 ---
+
+<div class="breadcrumb">	
+	<i class="icon-home"></i> 
+	<a href="{{site.url}}" title="陈大头的博客">首页</a> »
+	<a href="http://datochan.me/category-2.html" title="查看 {{post.categories}} 中的全部文章">{{post.categories}}</a> »
+		
+</div>
 
 <!-- 首页或者分类或者标签页面的模板 -->
 <main class="main" role="main">
-	<div class="rslides_container">
-		{% include rslides.html %}
-	</div>
-	<div class="clear"></div>
-	
 	<!-- 文章列表开始 -->
 	{% for post in paginator.posts %}
 	<article class="post">

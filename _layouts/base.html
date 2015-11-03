@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<title>{{ page.title }} | {{ site.title }}</title>
+<meta name="author" content="陈俊州">
+<meta http-equiv="Content-Language" content="zh-CN" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+{% if page.keywords %}
+  <meta name="keywords" content="Jekyll,Github">
+{% endif %}
+{% if page.description  %}
+  <meta name="description " content="">
+{% endif %}
+
+<link rel="stylesheet" type="text/css" href="{{site.resource_url}}/public/css/style.css" media="screen"{{site.resource_url}}/>
+<link rel="stylesheet" type="text/css" href="{{site.resource_url}}/public/css/font-awesome.min.css" media="screen"{{site.resource_url}}/>
+<link rel="stylesheet" type="text/css" href="{{site.resource_url}}/public/css/responsiveslides.css" media="screen"{{site.resource_url}}/>
+<link rel="stylesheet" type="text/css" href="{{site.resource_url}}/public/css/leonhere.css" media="screen"{{site.resource_url}}/>
+<link rel="stylesheet" type="text/css" href="{{site.resource_url}}/public/js/prettify/prettify.css" media="screen"{{site.resource_url}}/>
+
+<!--[if IE 7]>
+<link rel="stylesheet" type="text/css" href="{{site.resource_url}}/public/css/font-awesome-ie7.min.css" media="screen"{{site.resource_url}}/>
+<![endif]-->
+
+</head>
+<body>
+<header class="site-header" role="banner">
+	{% include header.html %}
+</header>
+<div class="container">
+<!-- 文章列表 或者 文章内容 -->
+{{content}}
+
+</div>
+<footer class="footer">
+	{% include footer.html %}
+</footer>
+<div class="backtop">
+	<a title="反回顶部"><i class="icon-chevron-up"></i></a>
+</div>
+<script type="text/javascript" src="{{site.resource_url}}/public/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="{{site.resource_url}}/public/js/responsiveslides.min.js"></script>
+<script type="text/javascript" src="{{site.resource_url}}/public/js/leonhere.js"></script>
+<script type="text/javascript" src="{{site.resource_url}}/public/js/jquery.lazyload.js"></script>
+<script type="text/javascript" src="{{site.resource_url}}/public/js/prettify/prettify.js"></script>
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"datochan"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+<!-- 多说公共JS代码 end -->
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	$(".post .thumb img,.entry img").lazyload({
+  	  	placeholder : "{{site.resource_url}}/public/images/grey.gif", 
+  	 	effect      : "fadeIn"
+	});
+
+	$("#slider").responsiveSlides({
+		auto: true,
+		pager: true,
+		nav: false,
+		speed: 500,
+		timeout: 5000,
+		namespace: "centered-btns"
+	});
+
+	// 点击文章目录时让滚动条缓慢滚动
+	$("#scroll").on("click", "a", function() {
+	    $('html, body').animate({
+	        scrollTop: $( $.attr(this, 'href') ).offset().top - 120
+	    }, 500);
+	    return false;
+	});
+
+	// 将目录移动到目录栏
+	$("#scroll ul").html($("#markdown-toc").html());
+	$("#markdown-toc").remove();
+
+	// 启用代码高亮
+    $("pre").addClass("prettyprint");
+    prettyPrint();
+});
+
+</script>
+
+</body>
+</html>
