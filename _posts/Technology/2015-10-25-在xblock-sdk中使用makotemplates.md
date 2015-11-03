@@ -6,8 +6,8 @@ tag: [edx,studio,]
 ---
 
 在xblock-sdk中编写插件时，代码中没有办法使用中文。初次遇到这个问题时并没有往心里去，自以为代码中用英文等最后通过i18n_tool翻译成中文也就是了。
-今天在一份试卷中插入了两个主观题，由于每个xblock都会将相应的js代码引入到当前页面中，结果可想而知: js代码函数重定义。
-用String.format方式对js代码进行替换关键字无果(js中'{}'是String.format的关键字)。<!-- more -->没有办法只能将js代码以字符串的形式写在了python文件中，弄的心里好一顿不舒服，总觉得要是能将mako templates放到xblock中使用就完美了。
+今天在一份试卷中插入了两个主观题，由于每个xblock都会将相应的js代码引入到当前页面中，结果可想而知: js代码函数重定义。<!-- more -->
+用String.format方式对js代码进行替换关键字无果(js中'{}'是String.format的关键字)。没有办法只能将js代码以字符串的形式写在了python文件中，弄的心里好一顿不舒服，总觉得要是能将mako templates放到xblock中使用就完美了。
 
 ### 在xblock-sdk中使用makotemplates
 
