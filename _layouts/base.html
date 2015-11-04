@@ -7,6 +7,8 @@
 <meta http-equiv="Content-Language" content="zh-CN" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <link rel="shortcut icon" type="image/x-icon" href="{{site.resource_url}}/public/images/favicon.ico" />
+<script type="text/javascript" src="{{site.resource_url}}/public/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="{{site.resource_url}}/public/js/responsiveslides.min.js"></script>
 
 {% if page.keywords %}
   <meta name="keywords" content="{{ page.keywords }}">
@@ -41,8 +43,6 @@
 <div class="backtop">
 	<a title="反回顶部"><i class="icon-chevron-up"></i></a>
 </div>
-<script type="text/javascript" src="{{site.resource_url}}/public/js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="{{site.resource_url}}/public/js/responsiveslides.min.js"></script>
 <script type="text/javascript" src="{{site.resource_url}}/public/js/leonhere.js"></script>
 <script type="text/javascript" src="{{site.resource_url}}/public/js/jquery.lazyload.js"></script>
 <script type="text/javascript" src="{{site.resource_url}}/public/js/prettify/prettify.js"></script>
@@ -62,7 +62,6 @@ var duoshuoQuery = {short_name:"datochan"};
 <!-- 多说公共JS代码 end -->
 
 <script type="text/javascript">
-
 $(document).ready(function(){
 	$(".post .thumb img,.entry img").lazyload({
   	  	placeholder : "{{site.resource_url}}/public/images/grey.gif", 
@@ -93,6 +92,7 @@ $(document).ready(function(){
 	// 启用代码高亮
     $("pre").addClass("prettyprint");
     prettyPrint();
+
 });
 
 </script>
