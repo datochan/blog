@@ -2,7 +2,7 @@
 layout: post
 title: 在xblock-sdk中使用makotemplates
 category: 技术文章
-tag: [edx,studio,]
+tag: [edx,makotemplate,xblock]
 ---
 
 在xblock-sdk中编写插件时，代码中没有办法使用中文。初次遇到这个问题时并没有往心里去，自以为代码中用英文等最后通过i18n_tool翻译成中文也就是了。

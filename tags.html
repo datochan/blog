@@ -1,6 +1,6 @@
 ---
 layout: base
-title: 分类页面
+title: 标签页面
 ---
 
 <script type="text/javascript">
@@ -13,27 +13,28 @@ title: 分类页面
 
 	var paramAry = urlString.split("?")[1].split("&");
 	if (paramAry.length == 1) {
-		var categoryItem = decodeURI(paramAry[0].split("=")[1]);
+		var tagItem = decodeURI(paramAry[0].split("=")[1]);
 		var pageNo = 1;
 
 	} else if (paramAry.length == 2) {
-		var categoryItem = decodeURI(paramAry[0].split("=")[1]);
+		var tagItem = decodeURI(paramAry[0].split("=")[1]);
 		var pageNo = paramAry[1].split("=")[1];
 
 	}
 
 	var dataStr = '{'+
-	'{% for cat in site.categories %}'+
-		'{% if cat[0] != site.categories.first[0] %}'+
+	'{% for tag in site.tags %}'+
+		'{% if tag[0] != site.tags.first[0] %}'+
 			','+
 		'{% endif %}'+
-		'"{{ cat[0] }}":['+
-			'{% for post in cat[1] %}'+
-				'{% if post != cat[1].first %}'+
+		'"{{ tag[0] }}":['+
+			'{% for post in tag[1] %}'+
+				'{% if post != tag[1].first %}'+
 					','+
 				'{% endif %}'+
 				'{"url":"{{post.url}}", '+
 				'"title":"{{post.title}}", '+
+				'"category":"{{post.categories}}", '+
 				{% capture tagIdx %}{{ post.tag | first }}{% endcapture %}
 				{% if site.logo_list[tagIdx] %}
 				'"logo":"{{site.logo_list[tagIdx]}}", '+
@@ -53,11 +54,11 @@ title: 分类页面
 	'{% endfor %}}';
 
 	var data = JSON.parse(dataStr),
-	    archieves = data[categoryItem];
+	    archieves = data[tagItem];
 
 	$(document).ready(function(){
 		// 填充导航中的分类信息
-		$(".breadcrumb .categories").attr("href", urlString).attr("title", "查看 "+categoryItem+" 中的全部文章").text(categoryItem);
+		$(".breadcrumb .categories").attr("href", urlString).attr("title", "查看 "+tagItem+" 中的全部文章").text(tagItem);
 		var pageSize = {{site.paginate}};
 		// 渲染文章列表
 		for (var i = (pageNo-1)*pageSize; i < archieves.length; i++) {
@@ -66,7 +67,7 @@ title: 分类页面
 
 			var post = archieves[i];
 			var articleHtml = '<article class="post"><div class="thumb"><a href="{{site.url}}'+post.url+'" title="'+post.title+'" target="_blank"><img alt="'+post.title+'" src="'+post.logo+'"/></a></div>'+
-				'<span class="post-cat"><a href="{{site.url}}/categories.html?cat='+categoryItem+'" title="查看 '+categoryItem+' 中的全部文章" target="_blank">'+categoryItem+'</a></span>'+
+				'<span class="post-cat"><a href="{{site.url}}/categories.html?cat='+post.category+'" title="查看 '+post.category+' 中的全部文章" target="_blank">'+post.category+'</a></span>'+
 				'<h2><a href="'+post.url+'" title="'+post.title+'" target="_blank" title="'+post.title+'" >'+post.title+'</a></h2>'+
 				'<div class="entry loop-entry"><p>'+post.excerpt+'</p></div>'+
 				'<div class="postmeta"><span><i class="icon-calendar"></i> 日期：'+post.date+'</span><span><i class="icon-signin"></i> <a href="'+post.url+'>阅读全文</a></span></div></article>';
@@ -79,33 +80,33 @@ title: 分类页面
 
 		if ( pageNo-1 > 0 ) {
 			if ( pageNo-1 == 1 ) {
-		    	pageHtml += '<a href="{{site.url}}/categories.html?cat='+categoryItem+'"><span class="page"><<</span></a>';
+		    	pageHtml += '<a href="{{site.url}}/tags.html?tag='+tagItem+'"><span class="page"><<</span></a>';
 			} else {
-		    	pageHtml += '<a href="{{site.url}}/categories.html?cat='+categoryItem+'&pageNo='+(pageNo-1)+'"><span class="page"><<</span></a>';
+		    	pageHtml += '<a href="{{site.url}}/tags.html?tag='+tagItem+'&pageNo='+(pageNo-1)+'"><span class="page"><<</span></a>';
 			}
 		} else {
-	    	pageHtml += '<a href="{{site.url}}/categories.html?cat='+categoryItem+'"><span class="page"><<</span></a>';
+	    	pageHtml += '<a href="{{site.url}}/tags.html?tag='+tagItem+'"><span class="page"><<</span></a>';
 		}
 
 		if ( pageNo == 1 ) {
     		pageHtml += '<span class="page now-page">1</span>';
 		} else {
-			pageHtml += '<a href="{{site.url}}/categories.html?cat='+categoryItem+'">1</a>';
+			pageHtml += '<a href="{{site.url}}/tags.html?tag='+tagItem+'">1</a>';
 		}
 
 		for (var idx = 2; idx <= Math.ceil(archieves.length/pageSize); idx++) {
 			if (idx == pageNo) {
 	    		pageHtml += '<span class="page now-page">'+idx+'</span>';
 			} else {
-	    		pageHtml += '<a href="{{site.url}}/categories.html?cat='+categoryItem+'&pageNo='+idx+'">'+idx+'</a>';
+	    		pageHtml += '<a href="{{site.url}}/tags.html?tag='+tagItem+'&pageNo='+idx+'">'+idx+'</a>';
 			}
 
 		}
 
 		if (pageNo+1 <= Math.ceil(archieves.length/pageSize)) {
-			pageHtml += '<a href="{{site.url}}/categories.html?cat='+categoryItem+'&pageNo='+(pageNo+1)+'">>></a>';
+			pageHtml += '<a href="{{site.url}}/tags.html?tag='+tagItem+'&pageNo='+(pageNo+1)+'">>></a>';
 		} else {
-			pageHtml += '<a href="{{site.url}}/categories.html?cat='+categoryItem+'&pageNo='+Math.ceil(archieves.length/pageSize)+'"><span class="page">>></span></a>';
+			pageHtml += '<a href="{{site.url}}/tags.html?tag='+tagItem+'&pageNo='+Math.ceil(archieves.length/pageSize)+'"><span class="page">>></span></a>';
 		}
 
 		pageHtml += '</div>';
