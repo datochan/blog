@@ -7,8 +7,8 @@ layout: base
 
 <div class="breadcrumb">	
 	<i class="icon-home"></i> 
-	<a href="{{site.url}}" title="陈大头的博客">首页</a> »
-	<a href="http://datochan.me/category-2.html" title="查看 {{post.categories}} 中的全部文章">{{post.categories}}</a> »
+	<a href="{{site.url}}" title="{{site.title}}">首页</a> »
+	<a href="{{site.url}}/categories.html?cat={{post.categories}}" title="查看 {{post.categories}} 中的全部文章">{{post.categories}}</a> »
 		
 </div>
 
@@ -18,7 +18,7 @@ layout: base
 		<h1>{{post.title}}</h1>
 		<div class="postmeta article-meta">
 			<span><i class="icon-calendar"></i> 日期：{{ post.date | date:"%Y-%m-%d" }} </span>
-			<span><i class="icon-book"></i> 栏目：<a href="http://datochan.me/category-2.html" title="{{post.categories}}" target="_blank">{{post.categories}}</a></span>
+			<span><i class="icon-book"></i> 栏目：<a href="{{site.url}}/categories.html?cat={{post.categories}}" title="{{post.categories}}" target="_blank">{{post.categories}}</a></span>
 	<!-- 		<span><i class="icon-fire"></i> 浏览：219次 </span>
 			<span><i class="icon-comments"></i> 评论：0条</span> -->
 		</div>
@@ -26,7 +26,7 @@ layout: base
 			{{content}}
 		</div>
 		<div class="tags">
-			<span><i class="icon-tags"></i> 标签：</span>{% for tag in post.tag %}<a href="http://datochan.me/tags-1.html" title="{{tag}}">{{tag}}</a>{% endfor %}
+			<span><i class="icon-tags"></i> 标签：</span>{% for tag in post.tag %}<a href="{{site.url}}/tags.html?tag={{tag}}" title="{{tag}}">{{tag}}</a>{% endfor %}
 		</div>
 		<div class="post-nav">
 			{% if prev %}
@@ -45,7 +45,7 @@ layout: base
 		</div>
 		<div class="post-copyright">
 			<p>内容版权声明：除非注明，否则皆为本站原创文章。</p>
-			<p>转载注明出处：<a href="{{site.url}}{{post.url}}" title="{{post.title}}" target="_blank">{{post.title}}({{site.url}}{{post.url}})</a></p>
+			<p>转载注明出处：<a href="{{site.url}}{{post.url}}" title="{{post.title}}" target="_blank">{{post.title}}({{site.title}})</a></p>
 		</div>	
 
 	<!-- 多说评论框 start -->
