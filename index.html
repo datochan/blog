@@ -15,7 +15,7 @@ title: 首页
 	<article class="post">
 		<div class="thumb">
 			{% capture tagIdx %}{{ post.tag | first }}{% endcapture %}
-			<a href="{{ post.url }}" title="{{ post.title }}" target="_blank">
+			<a href="{{site.url}}{{ post.url }}" title="{{ post.title }}" target="_blank">
 		    {% if site.logo_list[tagIdx] %}
 			<img alt="{{ post.title }}" src='{{site.logo_list[tagIdx]}}'/>
 		    {% else %}
@@ -28,7 +28,7 @@ title: 首页
 			<a href="{{site.url}}/categories.html?cat={{post.categories}}" title="查看 {{post.categories}} 中的全部文章" target="_blank">{{post.categories}}</a>
 		</span>
 		<h2>
-			<a href="{{ post.url }}" title="{{ post.title }}" target="_blank" title="{{ post.title }}" >{{ post.title }}</a>
+			<a href="{{site.url}}{{ post.url }}" title="{{ post.title }}" target="_blank" title="{{ post.title }}" >{{ post.title }}</a>
 		</h2>
 		<div class="entry loop-entry">
 			<p>
@@ -41,7 +41,7 @@ title: 首页
 		</div>
 		<div class="postmeta">
 			<span><i class="icon-calendar"></i> 日期：{{ post.date | date:"%Y-%m-%d" }} </span>
-			<span><i class="icon-signin"></i> <a href="{{ post.url }}">阅读全文</a></span>
+			<span><i class="icon-signin"></i> <a href="{{site.url}}{{ post.url }}">阅读全文</a></span>
 			<!--
 			<span><i class="icon-fire"></i> 浏览：204次</span>
 			<span><i class="icon-comments"></i> 评论：0条</span>
