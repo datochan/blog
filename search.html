@@ -1,84 +1,105 @@
 ---
 layout: base
-title: 搜索页面
+title:  搜索
 ---
 
+<script type="text/javascript">
+	var urlString = window.location.href;//获取url 
+
+	if (urlString.split("?").length <= 1) {
+		// 没有指定分类
+		window.location.href = "{{site.url}}";
+	}
+
+	var paramAry = urlString.split("?")[1].split("&");
+	if (paramAry.length == 1) {
+		var keyword = decodeURI(paramAry[0].split("=")[1]);
+		var pageNo = 1;
+
+	} else if (paramAry.length == 2) {
+		var keyword = decodeURI(paramAry[0].split("=")[1]);
+		var pageNo = paramAry[1].split("=")[1];
+
+	}
+
+	var dataStr = '[{% for post in site.posts %}{% if post != site.posts.first %},{% endif %}{"url":"{{post.url}}", "title":"{{post.title}}", "category":"{{post.categories}}", {% capture tagIdx %}{{ post.tag | first }}{% endcapture %}{% if site.logo_list[tagIdx] %}"logo":"{{site.logo_list[tagIdx]}}" {% else %}"logo":"{{site.resource_url}}/public/images/no-image.png" {% endif %}, "excerpt": {% if post.content contains "<!-- more -->" %}"{{ post.content | split:"<!-- more -->" | first | strip_html | strip_newlines }}"{% else %}"{{ post.excerpt | strip_html | truncatewords:100 | strip_newlines }}"{% endif %},"content": "{{ post.content | strip_html | xml_escape | strip_newlines}}", "date":"{{post.date | date:"%Y-%m-%d"}}"}{% endfor %}]';
+
+	var archieves = JSON.parse(dataStr);
+	var searchResultAry = archieves.filter(function(post, idx){
+		if(post.title.indexOf(keyword)>0 || post.content.indexOf(keyword)>0){
+			return true;
+		}
+		
+		return false;
+	});
+
+	$(document).ready(function(){
+		// 填充导航中的分类信息
+		$(".breadcrumb .categories").attr("href", urlString).attr("title", "搜索包含 "+keyword+" 的所有文章").text("搜索包含 "+keyword+" 的所有文章");
+		var pageSize = {{site.paginate}};
+
+		// 渲染文章列表
+		for (var i = (pageNo-1)*pageSize; i < searchResultAry.length; i++) {
+			// 渲染满一页的文章就停止
+			if ( i-(pageNo-1)*pageSize >= pageSize ) {break;}
+
+			var post = searchResultAry[i];
+			var articleHtml = '<article class="post"><div class="thumb"><a href="{{site.url}}'+post.url+'" title="'+post.title+'" target="_blank"><img alt="'+post.title+'" src="'+post.logo+'"/></a></div>'+
+				'<span class="post-cat"><a href="{{site.url}}/categories.html?cat='+post.category+'" title="查看 '+post.category+' 中的全部文章" target="_blank">'+post.category+'</a></span>'+
+				'<h2><a href="'+post.url+'" title="'+post.title+'" target="_blank" title="'+post.title+'" >'+post.title+'</a></h2>'+
+				'<div class="entry loop-entry"><p>'+post.excerpt+'</p></div>'+
+				'<div class="postmeta"><span><i class="icon-calendar"></i> 日期：'+post.date+'</span><span><i class="icon-signin"></i> <a href="'+post.url+'>阅读全文</a></span></div></article>';
+			$(".main").append(articleHtml);
+
+		};
+
+		// 渲染分页列表
+		var pageHtml = '<div class="pagenavi">';
+
+		if ( pageNo-1 > 0 ) {
+			if ( pageNo-1 == 1 ) {
+		    	pageHtml += '<a href="{{site.url}}/search.html?keyword='+keyword+'"><span class="page"><<</span></a>';
+			} else {
+		    	pageHtml += '<a href="{{site.url}}/search.html?keyword='+keyword+'&pageNo='+(pageNo-1)+'"><span class="page"><<</span></a>';
+			}
+		} else {
+	    	pageHtml += '<a href="{{site.url}}/search.html?keyword='+keyword+'"><span class="page"><<</span></a>';
+		}
+
+		if ( pageNo == 1 ) {
+    		pageHtml += '<span class="page now-page">1</span>';
+		} else {
+			pageHtml += '<a href="{{site.url}}/search.html?keyword='+keyword+'">1</a>';
+		}
+
+		for (var idx = 2; idx <= Math.ceil(searchResultAry.length/pageSize); idx++) {
+			if (idx == pageNo) {
+	    		pageHtml += '<span class="page now-page">'+idx+'</span>';
+			} else {
+	    		pageHtml += '<a href="{{site.url}}/search.html?keyword='+keyword+'&pageNo='+idx+'">'+idx+'</a>';
+			}
+
+		}
+
+		if (pageNo+1 <= Math.ceil(searchResultAry.length/pageSize)) {
+			pageHtml += '<a href="{{site.url}}/search.html?keyword='+keyword+'&pageNo='+(pageNo+1)+'">>></a>';
+		} else {
+			pageHtml += '<a href="{{site.url}}/search.html?keyword='+keyword+'&pageNo='+Math.ceil(searchResultAry.length/pageSize)+'"><span class="page">>></span></a>';
+		}
+
+		pageHtml += '</div>';
+		$(".main").append(pageHtml);
+	});
+
+</script>
 <div class="breadcrumb">	
 	<i class="icon-home"></i> 
-	<a href="{{site.url}}" title="陈大头的博客">首页</a> »
-	<a href="http://datochan.me/category-2.html" title="查看 {{post.categories}} 中的全部文章">{{post.categories}}</a> »
-		
+	<a href="{{site.url}}" title="{{site.title}}">首页</a> » <a class="categories"></a> »
 </div>
 
 <!-- 首页或者分类或者标签页面的模板 -->
 <main class="main" role="main">
-	<!-- 文章列表开始 -->
-	{% for post in paginator.posts %}
-	<article class="post">
-		<div class="thumb">
-			{% capture tagIdx %}{{ post.tag | first }}{% endcapture %}
-			<a href="{{ post.url }}" title="{{ post.title }}" target="_blank">
-			<img alt="{{ post.title }}" src='{{site.logo_list[tagIdx]}}'/>
-			</a>
-		</div>
-		<span class="post-cat">
-			<a href="http://ui66.com/category-2.html" title="{{post.categories}}" target="_blank">{{post.categories}}</a>
-		</span>
-		<h2>
-			<a href="{{ post.url }}" title="{{ post.title }}" target="_blank" title="{{ post.title }}" >{{ post.title }}</a>
-		</h2>
-		<div class="entry loop-entry">
-			<p>
-			{% if post.content contains "<!-- more -->" %}
-				{{ post.content | split:"<!-- more -->" | first }}
-			{% else %}
-				{{ post.excerpt | strip_html | truncatewords:100 }}
-			{% endif %}
-			</p>
-		</div>
-		<div class="postmeta">
-			<span><i class="icon-calendar"></i> 日期：{{ post.date | date:"%Y-%m-%d" }} </span>
-			<span><i class="icon-signin"></i> <a href="{{ post.url }}">阅读全文</a></span>
-			<!--
-			<span><i class="icon-fire"></i> 浏览：204次</span>
-			<span><i class="icon-comments"></i> 评论：0条</span>
-		    -->
-		</div>
-	</article>
-	{% endfor %}
-	<!-- 文章列表结束 -->
 
-	<div class="pagenavi">
-    {% if paginator.previous_page %}
-	    {% if paginator.previous_page == 1 %}
-	    	<a href="/"><span class="page"><<</span></a>
-	    {% else %}
-	    	<a href="/page{{paginator.previous_page}}"><span class="page"><<</span></a>
-	    {% endif %}
-    {% else %}
-	    <a href="/"><span class="page"><<</span></a>
-    {% endif %}
-
-    {% if paginator.page == 1 %}
-    	<span class="page now-page">1</span>
-    {% else %}
-    	<a href="/">1</a>
-    {% endif %}
-
-    {% for count in (2..paginator.total_pages) %}
-	    {% if count == paginator.page %}
-	    	<span class="page now-page">{{count}}</span>
-	    {% else %}
-	    	<a href="/page{{count}}">{{count}}</a>
-	    {% endif %}
-    {% endfor %}
-
-    {% if paginator.next_page %}
-    	<a href="/page{{paginator.next_page}}">>></a>
-    {% else %}
-    	<a href="/"><span class="page">>></span></a>
-    {% endif %}
-	</div>
 </main>
 
 <aside class="sidebar">	
