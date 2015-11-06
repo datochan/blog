@@ -71,7 +71,11 @@ layout: base
 		<li>
 			<div class="thumb">
 				<a href="{{site.url}}{{ rel_post.url }}" title="{{ rel_post.title | split:'-' | last }}">
-					<img src="{{site.logo_list[tagIdx]}}" alt="{{ rel_post.title | split:'-' | last }}">
+			    {% if site.logo_list[tagIdx] %}
+				<img alt="{{ post.title }}" src='{{site.logo_list[tagIdx]}}'/>
+			    {% else %}
+				<img alt="{{ post.title }}" src='{{site.resource_url}}/public/images/no-image.png'/>
+			    {% endif %}
 				</a>
 			</div>
 			<div class="hot-title">
