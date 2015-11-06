@@ -53,14 +53,14 @@
 <script type="text/javascript">
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 var duoshuoQuery = {short_name:"datochan"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
 <!-- 多说公共JS代码 end -->
 
 $(document).ready(function(){
@@ -85,10 +85,6 @@ $(document).ready(function(){
 	    }, 500);
 	    return false;
 	});
-
-	// 将目录移动到目录栏
-	$("#scroll ul").html($("#markdown-toc").html());
-	$("#markdown-toc").remove();
 
 	// 启用代码高亮
     $("pre").addClass("prettyprint");

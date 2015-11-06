@@ -95,3 +95,24 @@ layout: base
 </section>
 
 </aside>
+<script type="text/javascript">
+
+$(document).ready(function(){
+	// 将目录移动到目录栏
+	$("#scroll ul").html($("#markdown-toc").html());
+	$("#markdown-toc").remove();
+
+	$(window).scroll(function(){
+		var $headerH = $('.header').height() + $('.header').offset().top;
+		$('main .entry h3').each(function(){
+			if(($(this).offset().top - $headerH) <= 100 && ($(this).offset().top - $headerH) >= 0 
+				&& $("#markdown-toc-"+$(this).attr("id")).css('color') != "#ae432e"){
+				$("#scroll ul a").css("color", "#555");
+				$("#markdown-toc-"+$(this).attr("id")).css('color', '#ae432e').css("font-weight", "600");
+			}
+
+		});
+	});
+
+});
+</script>
