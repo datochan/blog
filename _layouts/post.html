@@ -107,7 +107,7 @@ $(document).ready(function(){
 		$('main .entry h3').each(function(){
 			if(($(this).offset().top - $headerH) <= 100 && ($(this).offset().top - $headerH) >= 0 
 				&& $("#markdown-toc-"+$(this).attr("id")).attr('style') != "color:#ae432e;font-weight:600;"){
-				$("#scroll ul a").css('style', 'color:#555;');
+				$("#scroll ul a").attr('style', 'color:#555;');
 				$("#markdown-toc-"+$(this).attr("id")).attr('style', 'color:#ae432e;font-weight:600;');
 			}
 
