@@ -106,9 +106,9 @@ $(document).ready(function(){
 		var $headerH = $('.header').height() + $('.header').offset().top;
 		$('main .entry h3').each(function(){
 			if(($(this).offset().top - $headerH) <= 100 && ($(this).offset().top - $headerH) >= 0 
-				&& $("#scroll ul a[href="+$(this).attr("id")+"]").css('color') != "#ae432e"){
+				&& $("#scroll ul a[href='#"+$(this).attr("id")+"']").css('color') != "#ae432e"){
 				$("#scroll ul a").css("color", "#555");
-				$("#scroll ul a[href="+$(this).attr("id")+"]").css('color', '#ae432e').css("font-weight", "600");
+				$("#scroll ul a[href='#"+$(this).attr("id")+"']").css('color', '#ae432e').css("font-weight", "600");
 			}
 
 		});
