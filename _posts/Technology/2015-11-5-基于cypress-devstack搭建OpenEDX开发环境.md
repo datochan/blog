@@ -155,20 +155,25 @@ OpenEdx的开发环境非常灵活, 在官方的Wiki中就有介绍PyCharm使用
 
 * Django项目
 我们说的edxplatform中的lms、cms项目都是django项目。这种项目的配置不麻烦，先配置远程的python解析器:
+
 ![使用虚拟机中的python解析器]({{site.resource_url}}/uploads/2015-11-5/remote_interpreter.png)
 
 项目的配置如下:
+
 ![项目的配置图]({{site.resource_url}}/uploads/2015-11-5/project_configure.png)
 
 预览项目:
+
 ![预览一下调试效果]({{site.resource_url}}/uploads/2015-11-5/preview.png)
 
 * Gunicorn项目
 
 Django代码自然是可以在 Gunicorn下跑的，这里说的是跑在Gunicorn中的普通python代码, 如:xserver下code grader代码或xblock插件代码的调试。
+
 ![启用gevent]({{site.resource_url}}/uploads/2015-11-5/enable_gevent.png)
 
 项目的配置方法:
+
 ![Gunicorn项目的配置]({{site.resource_url}}/uploads/2015-11-5/gunicorn_configure.png)
 
 ### 共用一个cypress虚拟机进行多个EDX项目的开发
