@@ -193,22 +193,17 @@ Django代码自然是可以在 Gunicorn下跑的，这里说的是跑在Gunicorn
 设置完成后, 用virtualBox以无界面的方式启动虚拟机。启动虚拟机后，执行如下命令:
 
 ~~~ bash
-cd /edx/app/edxapp/
-mkdir analytics_api
-mkdir cs_comments_service
-mkdir ecommerce
-mkdir insights
-mkdir ora
-mkdir themes
-mkdir edx-platform
-
-sudo mount -t vboxsf analytics_api /edx/app/edxapp/analytics_api
-sudo mount -t vboxsf cs_comments_service /edx/app/edxapp/cs_comments_service
-sudo mount -t vboxsf ecommerce /edx/app/edxapp/ecommerce
-sudo mount -t vboxsf insights /edx/app/edxapp/insights
-sudo mount -t vboxsf ora /edx/app/edxapp/ora
+sudo mount -t vboxsf src /edx/src
+sudo mount -t vboxsf ora /edx/app/ora/ora
+sudo mount -t vboxsf insights /edx/app/insights
 sudo mount -t vboxsf themes /edx/app/edxapp/themes
+sudo mount -t vboxsf programs /edx/app/programs/programs
+sudo mount -t vboxsf ecommerce /edx/app/ecommerce/ecommerce
 sudo mount -t vboxsf edx-platform /edx/app/edxapp/edx-platform
+sudo mount -t vboxsf analytics_api /edx/app/analytics_api/analytics_api
+sudo mount -t vboxsf cs_comments_service /edx/app/forum/cs_comments_service
+sudo mount -t vboxsf ecommerce-worker /edx/app/ecommerce_worker/ecommerce_worker
+
 ~~~
 
 可能默认的虚拟机已经创建了 edx-platform 和 themes俩文件夹。就不需要创建直接挂载即可。
