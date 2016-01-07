@@ -10,6 +10,8 @@ tag: [python, coffeescript, javascript, base64]
 
 ### python和javascript共用的base64加解密代码
 
+代码如下:
+
 ~~~ coffeescript
 class CSTBase64
     @_keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/='
