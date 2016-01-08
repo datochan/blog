@@ -2,7 +2,7 @@
 layout: post
 title: python和javascript共用的base64加解密代码
 category: 技术文章
-tag: [python, coffeescript, javascript, base64]
+tag: [code, python, coffeescript, javascript, base64]
 ---
 
 最近在OpenEDX中开发了个新的组件，其中需要支持上传功能。由于全都是异步操作，而一些现有的文件上传的库都失效不可用。所以想自己将文件编码成base64，扔到服务端，服务端接收解码保存，以此来实现文件上传的功能。之前在javascript中加解密部分一直喜欢用CryptoJS库。<!-- more -->
