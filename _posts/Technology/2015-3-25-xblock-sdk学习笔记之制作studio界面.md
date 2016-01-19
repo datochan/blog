@@ -186,7 +186,7 @@ disableSave: function() {
 },
 ~~~
 
-这代码的意思很明显是说，该xblock插件不支持save方法。根据栈回朔，定位到相关代码如下:      
+这代码的意思很明显是说，该xblock插件使用了自定义按钮(```editorView.hasCustomButtons()```, 其实也就是检查了```div```中是否使用了```editor-with-buttons```样式)就不渲染工具条了，如果该Xblock没有定义save方法就隐藏保存按钮。根据栈回朔，定位到相关代码如下:      
 
 ~~~ javascript
     handleXBlockFragment: function(fragment, options) {
@@ -260,7 +260,7 @@ initializeBlock: (element, requestToken) ->
     block
 ~~~
 
-到这里一切就都很明了了，我们只要让我们自定义的xblock方法返回一个对象，该对象中包含save方法即可，代码大致如下:   
+到这里一切就都很明了了，我们只要让我们自定义的xblock方法返回一个对象，该对象中包含save方法, 并且XBlock的html中不能使用 ```editor-with-buttons``` CSS类，代码大致如下:   
 
 ~~~ javascript
     // 返回一个自定义对象，其需要有save方法
