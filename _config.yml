@@ -1,5 +1,5 @@
 permalink: /:year/:month/:day/:title.html   # 博文的固定链接
-paginate: 15                                # 分页时每页博文数量
+paginate: 10                                # 分页时每页博文数量
 
 title: 陈大头的博客                           # 自定义常量
 url: http://datochan.me
@@ -26,6 +26,7 @@ author:
 logo_list:
     code: http://7xnsgl.com1.z0.glb.clouddn.com/public/images/category/code.jpg
     edx: http://7xnsgl.com1.z0.glb.clouddn.com/public/images/category/edx.jpg
-    web前端: http://7xnsgl.com1.z0.glb.clouddn.com/public/images/category/web.png
+    life: http://7xnsgl.com1.z0.glb.clouddn.com/public/images/category/life.png
+    web: http://7xnsgl.com1.z0.glb.clouddn.com/public/images/category/web.png
 
 subscribe_rss: /pages/atom.xml              #订阅地址
