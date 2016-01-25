@@ -126,3 +126,23 @@ title: 关于我
 		</ul>
 	</section>
 </aside>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$(window).scroll(function(){
+		var $headerH = $('.header').height() + $('.header').offset().top;
+
+		// 页面向上滚动, 正常观看
+		$('main .entry h3').each(function(){
+			if(($(this).offset().top - $headerH) <= 200 && ($(this).offset().top - $headerH) >= 0 
+				&& $("#scroll ul a[href='#"+$(this).attr("id")+"']").css('color') != "#ae432e"){
+				$("#scroll ul a").css("color", "#555");
+				$("#scroll ul a[href='#"+$(this).attr("id")+"']").css('color', '#ae432e').css("font-weight", "600");
+			}
+
+		});
+
+	});
+
+});
+</script>
