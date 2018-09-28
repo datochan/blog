@@ -3,7 +3,7 @@ paginate: 10                                # 分页时每页博文数量
 
 title: 陈大头的博客                           # 自定义常量
 url: http://datochan.me
-resource_url: http://7xnsgl.com1.z0.glb.clouddn.com
+resource_url: http://dn-datochan.qbox.me
 
 timezone:    Asia/Shanghai
 future:      true
@@ -24,9 +24,9 @@ author:
     link: http://datochan.me
 
 logo_list:
-    code: http://7xnsgl.com1.z0.glb.clouddn.com/public/images/category/code.jpg
-    edx: http://7xnsgl.com1.z0.glb.clouddn.com/public/images/category/edx.jpg
-    life: http://7xnsgl.com1.z0.glb.clouddn.com/public/images/category/life.png
-    web: http://7xnsgl.com1.z0.glb.clouddn.com/public/images/category/web.png
+    code: http://dn-datochan.qbox.me/public/images/category/code.jpg
+    edx: http://dn-datochan.qbox.me/public/images/category/edx.jpg
+    life: http://dn-datochan.qbox.me/public/images/category/life.png
+    web: http://dn-datochan.qbox.me/public/images/category/web.png
 
 subscribe_rss: /pages/atom.xml              #订阅地址
