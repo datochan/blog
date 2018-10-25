@@ -3,7 +3,7 @@ paginate: 10                                # 分页时每页博文数量
 
 title: 陈大头的博客                           # 自定义常量
 url: http://datochan.me
-resource_url: https://github.com/datochan/datochan.github.io/blob/master
+resource_url: https://raw.githubusercontent.com/datochan/datochan.github.io/master
 
 timezone:    Asia/Shanghai
 future:      true
@@ -24,9 +24,9 @@ author:
     link: http://datochan.me
 
 logo_list:
-    code: https://github.com/datochan/datochan.github.io/blob/master/public/images/category/code.jpg
-    edx: https://github.com/datochan/datochan.github.io/blob/master/public/images/category/edx.jpg
-    life: https://github.com/datochan/datochan.github.io/blob/master/public/images/category/life.png
-    web: https://github.com/datochan/datochan.github.io/blob/master/public/images/category/web.png
+    code: https://raw.githubusercontent.com/datochan/datochan.github.io/master/public/images/category/code.jpg
+    edx: https://raw.githubusercontent.com/datochan/datochan.github.io/master/public/images/category/edx.jpg
+    life: https://raw.githubusercontent.com/datochan/datochan.github.io/master/public/images/category/life.png
+    web: https://raw.githubusercontent.com/datochan/datochan.github.io/master/public/images/category/web.png
 
 subscribe_rss: /pages/atom.xml              #订阅地址
