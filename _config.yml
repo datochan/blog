@@ -1,7 +1,7 @@
 permalink: /:year/:month/:day/:title.html   # 博文的固定链接
 paginate: 10                                # 分页时每页博文数量
 
-title: 磕叟博文                           # 自定义常量
+title: 磕傁博文                           # 自定义常量
 url: http://blog.coso.ink
 resource_url: http://res.coso.ink
 
