@@ -2,8 +2,8 @@ permalink: /:year/:month/:day/:title.html   # 博文的固定链接
 paginate: 10                                # 分页时每页博文数量
 
 title: 陈大头的博客                           # 自定义常量
-url: http://datochan.me
-resource_url: http://res.datochan.me
+url: http://blog.coso.ink
+resource_url: http://res.coso.ink
 
 timezone:    Asia/Shanghai
 future:      true
@@ -21,12 +21,12 @@ kramdown:
 author:
     name: 陈俊州
     email: datochan@qq.com
-    link: http://datochan.me
+    link: http://coso.ink
 
 logo_list:
-    code: http://res.datochan.me/public/images/category/code.jpg
-    edx: http://res.datochan.me/public/images/category/edx.jpg
-    life: http://res.datochan.me/public/images/category/life.png
-    web: http://res.datochan.me/public/images/category/web.png
+    code: http://res.coso.ink/public/images/category/code.jpg
+    edx: http://res.coso.ink/public/images/category/edx.jpg
+    life: http://res.coso.ink/public/images/category/life.png
+    web: http://res.coso.ink/public/images/category/web.png
 
 subscribe_rss: /pages/atom.xml              #订阅地址
