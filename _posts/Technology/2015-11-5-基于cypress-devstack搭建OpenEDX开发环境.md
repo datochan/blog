@@ -156,25 +156,25 @@ OpenEdx的开发环境非常灵活, 在官方的Wiki中就有介绍PyCharm使用
 * Django项目
 我们说的edxplatform中的lms、cms项目都是django项目。这种项目的配置不麻烦，先配置远程的python解析器:
 
-![使用虚拟机中的python解析器]({{site.resource_url}}/remote_interpreter.png)
+![使用虚拟机中的python解析器]({{site.resource_url}}/uploads/remote_interpreter.png)
 
 项目的配置如下:
 
-![项目的配置图]({{site.resource_url}}/project_configure.png)
+![项目的配置图]({{site.resource_url}}/uploads/project_configure.png)
 
 预览项目:
 
-![预览一下调试效果]({{site.resource_url}}/preview.png)
+![预览一下调试效果]({{site.resource_url}}/uploads/preview.png)
 
 * Gunicorn项目
 
 Django代码自然是可以在 Gunicorn下跑的，这里说的是跑在Gunicorn中的普通python代码, 如:xserver下code grader代码或xblock插件代码的调试。
 
-![启用gevent]({{site.resource_url}}/enable_gevent.png)
+![启用gevent]({{site.resource_url}}/uploads/enable_gevent.png)
 
 项目的配置方法:
 
-![Gunicorn项目的配置]({{site.resource_url}}/gunicorn_configure.png)
+![Gunicorn项目的配置]({{site.resource_url}}/uploads/gunicorn_configure.png)
 
 ### 共用一个cypress虚拟机进行多个EDX项目的开发
 
@@ -184,11 +184,11 @@ Django代码自然是可以在 Gunicorn下跑的，这里说的是跑在Gunicorn
 
 安装完devstack之后关闭虚拟机, 用virtualBox设置一下端口映射: 点击 网络->网卡1->高级中进入设置界面，如下图(如果你用vagrant已经启动过一次虚拟机了那端口映射应该已经设置好了):
 
-![虚拟机设置端口映射]({{site.resource_url}}/port_mapping.png)
+![虚拟机设置端口映射]({{site.resource_url}}/uploads/port_mapping.png)
 
 共享文件夹, 将要挂载的文件夹制定好(不要设置自动挂载, 因为自动挂载的目录不是我们想要的路径), 如下图:
 
-![虚拟机设置共享文件夹]({{site.resource_url}}/share_folder.png)
+![虚拟机设置共享文件夹]({{site.resource_url}}/uploads/share_folder.png)
 
 设置完成后, 用virtualBox以无界面的方式启动虚拟机。启动虚拟机后，执行如下命令:
 
