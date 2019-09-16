@@ -18,6 +18,14 @@ kramdown:
     - footnotes
     - smart
 
+valine_comment:
+  enable: true
+# app_id
+  leancloud_appid: UbTEcXzPfMVEfpJ8kXQAEUyC-gzGzoHsz
+# app_key
+  leancloud_appkey: smUurhep6QpENvcr9CN72cJi
+# placeholde
+  placeholder: "请尽情吐槽~"
 
 author:
     name: 陈俊州
