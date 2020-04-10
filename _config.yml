@@ -34,8 +34,9 @@ author:
 
 logo_list:
     code: //res.coso.ink/public/images/category/code.jpg
-    edx: //res.coso.ink/public/images/category/edx.jpg
     life: //res.coso.ink/public/images/category/life.png
     web: //res.coso.ink/public/images/category/web.png
+    data: //res.coso.ink/public/images/category/data.png
+    invest: //res.coso.ink/public/images/category/invest.png
 
 subscribe_rss: /pages/atom.xml              #订阅地址
