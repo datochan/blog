@@ -1,5 +1,5 @@
-permalink: /:year/:month/:day/:title.html   # 博文的固定链接
-paginate: 10                                # 分页时每页博文数量
+permalink: /:year/:month/:day/:slug   # 博文的固定链接
+paginate: 15                                # 分页时每页博文数量
 
 title: 磕傁博文                           # 自定义常量
 url: https://blog.coso.ink

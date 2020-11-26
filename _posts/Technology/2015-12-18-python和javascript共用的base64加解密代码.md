@@ -1,6 +1,7 @@
 ---
 layout: post
 title: python和javascript共用的base64加解密代码
+slug: use-base64-within-python-and-javascript
 category: 技术文章
 tag: [code, python, coffeescript, javascript, base64]
 ---

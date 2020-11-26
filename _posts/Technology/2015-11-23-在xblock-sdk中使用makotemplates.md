@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 在xblock-sdk中使用makotemplates
+slug: use-makotemplates-within-xblock-sdk
 category: 技术文章
 tag: [web,edx,makotemplate,xblock]
 ---

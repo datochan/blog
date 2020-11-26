@@ -1,6 +1,7 @@
 ---
 layout: post
 title: xblock-sdk学习笔记之制作studio界面
+slug: dev-studio-ui-with-xblock-sdk
 category: 技术文章
 tag: [web, edx, studio, xblock, xblock界面]
 ---

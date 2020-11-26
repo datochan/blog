@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 基于cypress-devstack搭建OpenEDX开发环境
+slug: openedx-cypress-devstack
 category: 技术文章
 tag: [code,edx,vagrant]
 ---
