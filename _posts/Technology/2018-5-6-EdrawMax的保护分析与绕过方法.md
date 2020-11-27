@@ -9,7 +9,7 @@ tag: [code, crack, reverse-engineering]
 刚发现的这个画图软件很好用，出于好奇就分析了一下此软件的保护方式。结果让我深刻的认识到方法都
 
 ### 软件大致的保护思路
----
+
 软件整体的加密思路大致如下几个步骤:
 1. 软件采用C/S结构的网络认证方法。
 2. 获取系统的硬件标识符(后面详细说明获取方法)提交给服务端，服务端生成任意20位字符(字母数字组合)作为序列号(用作用户身份标识)。
@@ -19,7 +19,7 @@ tag: [code, crack, reverse-engineering]
 6. 每次软件启动，都会将激活码用公钥解密并与系统的硬件标识符进行校验：一致就认证成功，否则就认证失败(这里也存在隐患，要暴力破解可以从这里入手，但是暗桩较多且不完美不建议从这里入手)。
 
 ### 绕过保护的思路
----
+
 由于可以本地验证，我们可以生成自己的RSA公钥私钥，来对系统的硬件标识符进行加密，以此来绕过软件的认证。
 
 通过分析可知在软件的`ObjectModule.dll(libObjectModule.dylib)`中存储了RSA加密的公钥，将其替换成我们自己的，然后我们用自己的私钥加密硬件标识符，这样就可以认证成功了。
@@ -34,8 +34,6 @@ tag: [code, crack, reverse-engineering]
 5. keygen就用不着说了，一切都很明了。
 
 ### 硬件标识符的获取方法
-
----
 
 整个硬件信息的获取及编码方法是通过 `libImporter.1.0.0.dylib` 的中导出方法: `__int64 __fastcall PDFExporter::exportEffectShine(PDFExporter *this)` 进行的, 具体就不贴代码了。
 
@@ -97,8 +95,6 @@ ioreg -c IOPlatformExpertDevice | grep 'IOPlatformSerialNumber'
 4. 将上面截取出来的字符串按照3，1，2的顺序排列并转换成小写字母得到硬件标识符: `a086bfdd86eb`
 
 ### 后记
-
----
 
 以上思路应该是通杀现有所有平台和版本的，相关的代码与文件放在github上: [https://github.com/datochan/DTEdrawMax](https://github.com/datochan/DTEdrawMax), keygen 方面，由于我不用windows这部分代码空缺，有需要的童鞋可以自己补全这部分代码。
 
