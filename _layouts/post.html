@@ -20,7 +20,7 @@ layout: base
 			<span><i class="icon-calendar"></i> 日期：{{ post.date | date:"%Y-%m-%d" }} </span>
 			<span><i class="icon-book"></i> 分类：<a href="{{site.url}}/categories.html?cat={{post.categories}}" title="{{post.categories}}" target="_blank">{{post.categories}}</a></span>
 			<!-- id 将作为查询条件 -->
-			<span id="<Your/Path/Name>" class="leancloud_visitors" data-flag-title="Your Article Title">
+			<span id="{{post.slug}}" class="leancloud_visitors" data-flag-title="{{post.title}}">
 			    <i class="icon-fire"></i>浏览: <i class="leancloud-visitors-count">0</i> 次
 			    
 			</span>
