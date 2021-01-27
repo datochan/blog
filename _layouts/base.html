@@ -90,10 +90,10 @@ $(document).ready(function(){
 <script type="text/javascript">
     new Valine({
         el: '#comments',
-	visitor: true, // 阅读量统计
         app_id: '{{ site.valine_comment.leancloud_appid }}',
         app_key: '{{ site.valine_comment.leancloud_appkey }}',
-        placeholder:'{{ site.valine_comment.placeholder }}'
+        placeholder:'{{ site.valine_comment.placeholder }}',
+        visitor: true
     });
 </script>
 {% endif %}
