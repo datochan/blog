@@ -90,11 +90,11 @@ $(document).ready(function(){
 <script type="text/javascript">
 new Valine(Object.assign({
     el: '#comments',
+    appId: "{{ site.valine_comment.leancloud_appid }}",
+    appKey: "{{ site.valine_comment.leancloud_appkey }}",
+    placeholder: "{{ site.valine_comment.placeholder }}",
 },
 {
-    "appId": "{{ site.valine_comment.leancloud_appid }}",
-    "appKey": "{{ site.valine_comment.leancloud_appkey }}",
-    "placeholder": "{{ site.valine_comment.placeholder }}",
     "avatar": "mp",
     "meta": ["nick", "mail", "link"],
     "pageSize": 6,
