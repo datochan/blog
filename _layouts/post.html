@@ -19,8 +19,12 @@ layout: base
 		<div class="postmeta article-meta">
 			<span><i class="icon-calendar"></i> 日期：{{ post.date | date:"%Y-%m-%d" }} </span>
 			<span><i class="icon-book"></i> 分类：<a href="{{site.url}}/categories.html?cat={{post.categories}}" title="{{post.categories}}" target="_blank">{{post.categories}}</a></span>
-	<!-- 		<span><i class="icon-fire"></i> 浏览：219次 </span>
-			<span><i class="icon-comments"></i> 评论：0条</span> -->
+			<!-- id 将作为查询条件 -->
+			<span id="<Your/Path/Name>" class="leancloud_visitors" data-flag-title="Your Article Title">
+			    <i class="icon-fire"></i>浏览: <i class="leancloud-visitors-count">0</i> 次
+			    
+			</span>
+			<!-- <span><i class="icon-comments"></i> 评论：0条</span> -->
 		</div>
 		<div class="entry">
 			{{content}}
