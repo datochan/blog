@@ -48,7 +48,8 @@ title:  搜索
 				'<span class="post-cat"><a href="{{site.url}}/categories.html?cat='+post.category+'" title="查看 '+post.category+' 中的全部文章" target="_blank">'+post.category+'</a></span>'+
 				'<h2><a href="'+post.url+'" title="'+post.title+'" target="_blank" title="'+post.title+'" >'+post.title+'</a></h2>'+
 				'<div class="entry loop-entry"><p>'+post.excerpt+'</p></div>'+
-				'<div class="postmeta"><span><i class="icon-calendar"></i> 日期：'+post.date+'</span><span><i class="icon-signin"></i> <a href="'+post.url+'>阅读全文</a></span></div></article>';
+				'<div class="postmeta"><span><i class="icon-calendar"></i> 日期：'+post.date+'</span><span id="'+post.slug+'" class="leancloud_visitors" data-flag-title="{'+post.title+'"><i class="icon-fire"></i> 浏览：<i class="leancloud-visitors-count">0</i> 次</span></div></article>';
+
 			$(".main").append(articleHtml);
 
 		};
