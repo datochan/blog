@@ -1,13 +1,19 @@
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
-    <title >404</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/geniucker/source@0.0.28/dino/dino.css">
-    <link href="https://cdn.jsdelivr.net/gh/geniucker/source@0.0.29/dino/Open+Sans.css" rel="stylesheet"> 
-    <script src="https://cdn.jsdelivr.net/gh/geniucker/source@0.0.28/dino/dino.js"></script>
-</head>
-<body id="t" class="offline">
+---
+layout: base
+title: 404
+---
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/geniucker/source@0.0.28/dino/dino.css">
+<link href="https://cdn.jsdelivr.net/gh/geniucker/source@0.0.29/dino/Open+Sans.css" rel="stylesheet"> 
+
+<div class="breadcrumb">    
+    <i class="icon-home"></i> 
+    <a href="{{site.url}}" title="{{site.title}}">首页</a> »
+    <a href="http://datochan.me/pages/about.html">404</a>
+</div>
+<!-- 首页或者分类或者标签页面的模板 -->
+<main class="main" role="main">
+    <div class="clear"></div>
     <div id="messageBox" class="sendmessage">
          <div class="niokbutton" onclick="okbuttonsend()"></div>
     </div>
@@ -25,9 +31,10 @@
             </template>
         </div>
     </div>
-</body>
-<script>
-    document.onkeydown = function(evt) {
+</main>
+<script src="https://cdn.jsdelivr.net/gh/geniucker/source@0.0.28/dino/dino.js"></script>
+<script type="text/javascript">
+document.onkeydown = function(evt) {
     evt = evt || window.event;
     if (evt.keyCode == 32) {
         var box = document.getElementById("messageBox");
@@ -35,4 +42,3 @@
     }
 };
 </script>
-</html>
