@@ -20,10 +20,10 @@ layout: base
 			<span><i class="icon-calendar"></i> 日期：{{ post.date | date:"%Y-%m-%d" }} </span>
 			<span><i class="icon-book"></i> 分类：<a href="{{site.url}}/categories.html?cat={{post.categories}}" title="{{post.categories}}" target="_blank">{{post.categories}}</a></span>
 			<!-- id 将作为查询条件 -->
-			<span id="{{post.slug}}" class="leancloud_visitors" data-flag-title="{{post.title}}">
-			    <i class="icon-fire"></i> 浏览：<i class="leancloud-visitors-count" data-xid="pathname">0</i> 次
+			<span id="{{post.url}}" class="leancloud_visitors" data-flag-title="{{post.title}}">
+			    <i class="icon-fire"></i> 浏览：<i class="leancloud-visitors-count" data-xid="{{post.url}}">0</i> 次
 			</span>
-			<span><i class="icon-comments"></i> 评论：<i class="valine-comment-count" data-xid="pathname">0</i> 条</span>
+			<span><i class="icon-comments"></i> 评论：<i class="valine-comment-count" data-xid="{{post.url}}">0</i> 条</span>
 		</div>
 		<div class="entry">
 			{{content}}

@@ -49,9 +49,8 @@ title:  搜索
 				'<h2><a href="'+post.url+'" title="'+post.title+'" target="_blank" title="'+post.title+'" >'+post.title+'</a></h2>'+
 				'<div class="entry loop-entry"><p>'+post.excerpt+'</p></div>'+
 				'<div class="postmeta"><span><i class="icon-calendar"></i> 日期：'+post.date+'</span>'+
-				'<span id="'+post.slug+'" class="leancloud_visitors" data-xid="pathname" data-flag-title="{'+post.title+'"><i class="icon-fire"></i> 浏览：<i class="leancloud-visitors-count">0</i> 次</span>'+
-				'<span><i class="icon-comments"></i> 评论：<i class="valine-comment-count" data-xid="pathname">0</i> 条</span>'+
-				'</div></article>';
+				'<span id="'+post.slug+'" class="leancloud_visitors" data-xid="'+post.url+'" data-flag-title="'+post.title+'"><i class="icon-fire"></i> 浏览：<i class="leancloud-visitors-count">0</i> 次</span>'+
+				'<span><i class="icon-comments"></i> 评论：<i class="valine-comment-count" data-xid="'+post.url+'">0</i> 条</span>'+
 				'</div></article>';
 
 			$(".main").append(articleHtml);
