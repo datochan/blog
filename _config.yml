@@ -21,11 +21,11 @@ kramdown:
 valine_comment:
   enable: true
 # app_id
-  leancloud_appid: dYAHatfo8BQDePss8gK60U1f-MdYXbMMI
+  leancloud_appid: UbTEcXzPfMVEfpJ8kXQAEUyC-gzGzoHsz
 # app_key
-  leancloud_appkey: lYKFo6MeHC1hEvKDoCgN8UNJ
+  leancloud_appkey: smUurhep6QpENvcr9CN72cJi
 # placeholde
-  placeholder: "请尽情吐槽~"
+  placeholder: "请尽情吐槽~~"
 
 author:
     name: 陈俊州
