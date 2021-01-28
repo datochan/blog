@@ -3,8 +3,23 @@
   <meta http-equiv="Content-Language" content="zh-CN"> 
   <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312"> 
   <title>404 | 磕傁博文</title> 
-  <link rel="alternate" href="/pages/atom.xml" title="{{ site.title }}" type="application/atom+xml">
+  <link rel="alternate" href="/pages/atom.xml" title="磕傁博文" type="application/atom+xml">
+  <script type="text/javascript">
+  // document.domain = "caibaojian.com";
+  function setIframeHeight(iframe) {
+    if (iframe) {
+      var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+      if (iframeWin.document.body) {
+        iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+      }
+    }
+  };
+
+  window.onload = function () {
+    setIframeHeight(document.getElementById('external-frame'));
+  }
+  </script>
 </head>
 <body>
-<iframe src="/pages/dino.html" seamless="seamless" scrolling="no" frameborder="0" style="width: -webkit-fill-available;"></iframe>
+<iframe src="/pages/dino.html" seamless="seamless" scrolling="no" frameborder="0" style="width: -webkit-fill-available;" id="external-frame" onload="setIframeHeight(this)"></iframe>
 </html>
