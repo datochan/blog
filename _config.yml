@@ -21,9 +21,9 @@ kramdown:
 valine_comment:
   enable: true
 # app_id
-  leancloud_appid: UbTEcXzPfMVEfpJ8kXQAEUyC-gzGzoHsz
+  leancloud_appid: dYAHatfo8BQDePss8gK60U1f-MdYXbMMI
 # app_key
-  leancloud_appkey: smUurhep6QpENvcr9CN72cJi
+  leancloud_appkey: lYKFo6MeHC1hEvKDoCgN8UNJ
 # placeholde
   placeholder: "请尽情吐槽~"
 
