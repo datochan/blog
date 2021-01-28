@@ -41,10 +41,8 @@ title: 首页
 		</div>
 		<div class="postmeta">
 			<span><i class="icon-calendar"></i> 日期：{{ post.date | date:"%Y-%m-%d" }} </span>
-			<span id="{{post.slug}}" class="leancloud_visitors" data-flag-title="{{post.title}}"><i class="icon-fire"></i> 浏览：<i class="leancloud-visitors-count">0</i> 次</span>
-			<!--
-			<span><i class="icon-comments"></i> 评论：0条</span>
-		    -->
+			<span id="{{post.slug}}" class="leancloud_visitors" data-flag-title="{{post.title}}"><i class="icon-fire"></i> 浏览：<i class="leancloud-visitors-count" data-xid="pathname">0</i> 次</span>
+			<span><i class="icon-comments"></i> 评论：<i class="valine-comment-count" data-xid="pathname">0</i> 条</span>
 		</div>
 	</article>
 	{% endfor %}
