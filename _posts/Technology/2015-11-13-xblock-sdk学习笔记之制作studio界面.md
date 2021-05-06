@@ -3,7 +3,7 @@ layout: post
 title: xblock-sdk学习笔记之制作studio界面
 slug: dev-studio-ui-with-xblock-sdk
 category: 技术文章
-tag: [web, edx, studio, xblock, xblock界面]
+tag: [web, edx]
 ---
 
 网上找过不少关于xblock的教程(详细请见文章末尾的参考文章), 对于Xblock的使用仍然觉得一知半解。具体使用的过程中也是遇到的不少的坎坷。这里记录将其一一记录下来以备忘。<!-- more -->

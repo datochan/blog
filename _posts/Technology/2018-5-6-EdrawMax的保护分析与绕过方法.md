@@ -3,7 +3,7 @@ layout: post
 title: EdrawMax的保护分析与绕过方法
 slug: edrawmax-protection-method-and-crack
 category: 技术文章
-tag: [code, crack, reverse-engineering]
+tag: [code, crack]
 ---
 
 刚发现的这个画图软件很好用，出于好奇就分析了一下此软件的保护方式。结果让我深刻的认识到再牛的加密方法也要看怎么用，所以这里总结记录一下。<!-- More -->
