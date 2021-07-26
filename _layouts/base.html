@@ -87,7 +87,7 @@ $(document).ready(function(){
 
 
 
-var viewer = new Viewer(document.querySelectorAll(".post .entry img"), {
+var viewer = new Viewer(document.getElementById("postEntry"), {
     url: 'src',
     title: function (image) {
         return image.alt + ' (' + (this.index + 1) + '/' + this.length + ')';
