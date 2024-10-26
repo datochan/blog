@@ -33,10 +33,10 @@ author:
     link: https://blog.coso.ink
 
 logo_list:
-    code: //www.coso.ink/public/images/category/code.jpg
-    life: //www.coso.ink/public/images/category/life.png
-    web: //www.coso.ink/public/images/category/web.png
-    data: //www.coso.ink/public/images/category/data.png
-    invest: //www.coso.ink/public/images/category/invest.png
+    code: //coso.ink/public/images/category/code.jpg
+    life: //coso.ink/public/images/category/life.png
+    web: //coso.ink/public/images/category/web.png
+    data: //coso.ink/public/images/category/data.png
+    invest: //coso.ink/public/images/category/invest.png
 
 subscribe_rss: /pages/atom.xml              #订阅地址
