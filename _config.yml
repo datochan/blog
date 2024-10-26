@@ -2,8 +2,8 @@ permalink: /:year/:month/:day/:slug   # 博文的固定链接
 paginate: 5                                # 分页时每页博文数量
 
 title: 磕傁博文                           # 自定义常量
-url: https://blog.coso.ink
-resource_url: //res.coso.ink
+url: https://datochan.github.io/blog/
+resource_url: //www.coso.ink
 
 timezone:    Asia/Shanghai
 future:      true
@@ -33,10 +33,10 @@ author:
     link: https://blog.coso.ink
 
 logo_list:
-    code: //res.coso.ink/public/images/category/code.jpg
-    life: //res.coso.ink/public/images/category/life.png
-    web: //res.coso.ink/public/images/category/web.png
-    data: //res.coso.ink/public/images/category/data.png
-    invest: //res.coso.ink/public/images/category/invest.png
+    code: //www.coso.ink/public/images/category/code.jpg
+    life: //www.coso.ink/public/images/category/life.png
+    web: //www.coso.ink/public/images/category/web.png
+    data: //www.coso.ink/public/images/category/data.png
+    invest: //www.coso.ink/public/images/category/invest.png
 
 subscribe_rss: /pages/atom.xml              #订阅地址
