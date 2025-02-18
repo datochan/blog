@@ -3,7 +3,7 @@ paginate: 5                                # 分页时每页博文数量
 
 title: 磕傁博文                           # 自定义常量
 url: https://datochan.github.io/blog/
-resource_url: //res.coso.ink
+resource_url: //coso.ink
 
 timezone:    Asia/Shanghai
 future:      true
